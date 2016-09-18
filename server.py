@@ -118,7 +118,7 @@ def update_opponent():
     if hitcount == 17:
         return parse.urlencode({'win': 1})
     else:
-        return parse.urlencode({'win': 1})
+        return parse.urlencode({'win': 0})
 
 
 @app.get('/opponent_board.html')
