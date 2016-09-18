@@ -1,0 +1,7 @@
+Client sends http POST request with url encoded x and y coordinates if in the format python client.py ip port x y
+
+Server responds with 200 OK for a valid attempt, and sends url encoded hit variable, and sink if applicable. 
+Other error codes are 404 for out of bounds, 410 for a repeat hit, and 400 for a badly formatted request
+ 
+The client also tells its own server the results of its attack, so that the server may keep track of the opponent's board.  
+The server creates a file with its port information for the client to read and connect to. 
