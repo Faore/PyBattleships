@@ -2,11 +2,13 @@ import http.client, sys, urllib.parse
 
 ip = sys.argv[1]
 port = sys.argv[2]
-x = sys.argv[3]
-y = sys.argv[4]
+x = int(sys.argv[3])
+y = int(sys.argv[4])
 print(ip)
 hit = 0
 sink = 0
+f = open("clientData")
+selfPort = int(f.readline())
 
 params = urllib.parse.urlencode({'x': x, 'y': y})
 headers = {"Content-type": "application/x-www-form-urlencoded", "Accept": "text/plain"}
@@ -17,8 +19,10 @@ print(response.status, response.reason)
 results = str(response.read())
 for letter in results:
     if letter == '1':
+        params = urllib.parse.urlencode({'x': x, 'y': y, 'hit': '1'})
         print("Hit!")
     if letter == '0':
+        params = urllib.parse.urlencode({'x': x, 'y': y, 'hit': '0'})
         print("Miss :(")
     if letter == 'C':
         print("You sunk my Carrier")
@@ -31,5 +35,11 @@ for letter in results:
     if letter == 'D':
         print("You sunk my Destroyer")
 
-
+conn = http.client.HTTPConnection('localhost', selfPort)
+conn.request("POST", "/self", params, headers)
+response = conn.getresponse()
+results = str(response.read())
+for letter in results:
+    if letter == '1':
+        print("You win!")
 conn.close()
