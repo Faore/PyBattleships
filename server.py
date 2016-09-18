@@ -71,7 +71,7 @@ def process_action():
         return parse.urlencode({'hit': 1, 'sink': spot})
 @app.get('/own_board.html')
 def show_board():
-    content = "<h1>Board Contents</h1><table>"
+    content = "<h1>Board Contents</h1><p>O is a hit, X is a miss, C is a Carrier, B is battleship, R is a cRuiser, S is a Submarine, D is a Destroyer</p><table>"
     for i in range(0, len(grid)):
         content += str("<tr>")
         for j in range(0, len(grid[i])):
@@ -108,22 +108,10 @@ def update_opponent():
     else:
         oppGrid[y][x] = 'X'
 
-    hitcount = 0
-    # Check for a win
-    for i in range(0, len(grid)):
-        for j in range(0, len(grid[i])):
-            if grid[j][i] == 'O':
-                hitcount += 1
-
-    if hitcount == 17:
-        return parse.urlencode({'win': 1})
-    else:
-        return parse.urlencode({'win': 0})
-
 
 @app.get('/opponent_board.html')
 def opponent_board():
-    content = "<h1>Opponent Board Contents</h1><table>"
+    content = "<h1>Opponent Board Contents</h1><p>O is a hit, X is a miss, C is a Carrier, B is battleship, R is a cRuiser, S is a Submarine, D is a Destroyer</p><table>"
     for i in range(0, len(oppGrid)):
         content += str("<tr>")
         for j in range(0, len(oppGrid[i])):

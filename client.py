@@ -5,6 +5,7 @@ port = sys.argv[2]
 x = int(sys.argv[3])
 y = int(sys.argv[4])
 print(ip)
+print("Please be patient! Sometimes the requests can take a long time. Just wait until the console prompt comes back.")
 hit = 0
 sink = 0
 f = open("clientData")
@@ -37,9 +38,4 @@ for letter in results:
 
 conn = http.client.HTTPConnection('localhost', selfPort)
 conn.request("POST", "/self", params, headers)
-response = conn.getresponse()
-results = str(response.read())
-for letter in results:
-    if letter == '1':
-        print("You win!")
 conn.close()
